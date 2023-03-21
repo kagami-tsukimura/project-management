@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,22 +12,26 @@
     <template id="project-input">
       <form>
         <div class="form-control">
-          <label for="title">タイトル</label>
+          <label for="title">Title</label>
           <input type="text" id="title" />
         </div>
         <div class="form-control">
-          <label for="description">説明</label>
+          <label for="description">Description</label>
           <textarea id="description" rows="3"></textarea>
         </div>
         <div class="form-control">
-          <label for="manday">人日</label>
+          <label for="manday">Manday</label>
           <input type="number" id="manday" step="1" min="0" max="10000" />
         </div>
-        <button type="submit">プロジェクト追加</button>
+        <button type="submit">Project addition</button>
       </form>
     </template>
     <template id="single-project">
-      <li></li>
+      <li draggable="true">
+        <h2></h2>
+        <h3></h3>
+        <p></p>
+      </li>
     </template>
     <template id="project-list">
       <section class="projects">
