@@ -293,7 +293,7 @@ class ProjectList
     const listId = `${this.type}-projects-list`;
     this.element.querySelector('ul')!.id = listId;
     this.element.querySelector('h2')!.textContent =
-      this.type === 'active' ? 'Active project' : 'Finished project';
+      this.type === 'active' ? 'Active Project' : 'Finished Project';
   }
 
   private renderProjects() {
