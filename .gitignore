@@ -1,0 +1,6 @@
+# ignore_directory 
+.vscode
+node_modules
+
+# ignore_file 
+package-lock.json
