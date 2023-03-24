@@ -10,20 +10,20 @@ export class ProjectItem
 {
   private project: Project;
 
-  get manday() {
-    if (this.project.manday === 1) {
-      return this.project.manday.toString() + 'man-day';
-    } else if (this.project.manday < 20) {
-      return this.project.manday.toString() + 'man-days';
-    } else {
-      return (this.project.manday / 20).toString() + 'man-month';
+  get manday(): string {
+    switch (true) {
+      case this.project.manday === 1:
+        return '1 man-day';
+      case this.project.manday < 20:
+        return `${this.project.manday} man-days`;
+      default:
+        return `${this.project.manday / 20} man-months`;
     }
   }
 
   constructor(hostId: string, project: Project) {
     super('single-project', hostId, false, project.id);
     this.project = project;
-
     this.configure();
     this.renderContent();
   }

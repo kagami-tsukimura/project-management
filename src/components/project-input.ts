@@ -2,6 +2,7 @@ import { Component } from './base-component';
 import * as Validation from '../util/validation';
 import { autobind } from '../decorators/autobind';
 import { projectState } from '../state/project-state';
+
 // ProjectInput Class
 export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   titleInputElement: HTMLInputElement;
@@ -33,7 +34,7 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   private gatherUserInput(): [string, string, number] | void {
     const enteredTitle = this.titleInputElement.value;
     const enteredDescription = this.descriptionInputElement.value;
-    const enteredManday = this.mandayInputElement.value;
+    const enteredManday = this.mandayInputElement.valueAsNumber;
 
     const titleValidatable: Validation.Validatable = {
       value: enteredTitle,
@@ -45,19 +46,31 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       minLength: 5,
     };
     const mandayValidatable: Validation.Validatable = {
-      value: +enteredManday,
+      value: enteredManday,
       required: true,
       min: 1,
       max: 1000,
     };
-    if (
+    const isInputsValid =
       Validation.validate(titleValidatable) &&
       Validation.validate(descriptionValidatable) &&
-      Validation.validate(mandayValidatable)
-    ) {
-      return [enteredTitle, enteredDescription, +enteredManday];
+      Validation.validate(mandayValidatable);
+
+    if (isInputsValid) {
+      return [enteredTitle, enteredDescription, enteredManday];
     } else {
-      alert('The input value is incorrect. Please try again.');
+      const TITLE_ERROR = '・The title is a required input.\n';
+      const DESC_ERROR =
+        '・Description is a required input of 5 or more characters.\n';
+      const MANDAY_ERROR =
+        '・Manday is a required input of between 1 and 1000.\n';
+      const errorMessage = `${
+        !Validation.validate(titleValidatable) ? TITLE_ERROR : ''
+      }${!Validation.validate(descriptionValidatable) ? DESC_ERROR : ''}${
+        !Validation.validate(mandayValidatable) ? MANDAY_ERROR : ''
+      }`;
+
+      alert(`The input value is incorrect. Please try again.\n${errorMessage}`);
       return;
     }
   }
