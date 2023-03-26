@@ -1,5 +1,10 @@
 # This application is managing tasks in a project
 
+## Start with the following command.
+```console
+npm start
+```
+
 ## You can use it by following these steps
 
 - Enter the task title.
